@@ -1,0 +1,174 @@
+-- phpMyAdmin SQL Dump
+-- version 4.4.15.10
+-- https://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jan 10, 2023 at 11:07 AM
+-- Server version: 5.6.41
+-- PHP Version: 7.2.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `DB_FRUITIS`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `FRUTERIAS`
+--
+
+CREATE TABLE IF NOT EXISTS `FRUTERIAS` (
+  `ID` int(11) NOT NULL,
+  `NOMBRE` varchar(20) NOT NULL,
+  `LOCALIZACION` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `HORTALIZAS`
+--
+
+CREATE TABLE IF NOT EXISTS `HORTALIZAS` (
+  `ID` int(11) NOT NULL,
+  `NOMBRE` varchar(20) NOT NULL,
+  `COLOR` varchar(20) NOT NULL DEFAULT 'verde',
+  `TAM` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `HORTALIZAS_FRUTERIAS`
+--
+
+CREATE TABLE IF NOT EXISTS `HORTALIZAS_FRUTERIAS` (
+  `ID` int(11) NOT NULL,
+  `ID_HORTALIZA` int(11) NOT NULL,
+  `ID_FRUTERIA` int(11) NOT NULL,
+  `CANTIDAD` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `VERDURAS`
+--
+
+CREATE TABLE IF NOT EXISTS `VERDURAS` (
+  `ID` int(11) NOT NULL,
+  `NOMBRE` varchar(20) NOT NULL,
+  `TIPO` tinyint(4) NOT NULL,
+  `COLOR` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `VERDURAS_FRUTERIAS`
+--
+
+CREATE TABLE IF NOT EXISTS `VERDURAS_FRUTERIAS` (
+  `ID` int(11) NOT NULL,
+  `ID_VERDURA` int(11) NOT NULL,
+  `ID_FRUTERIA` int(11) NOT NULL,
+  `CANTIDAD` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `FRUTERIAS`
+--
+ALTER TABLE `FRUTERIAS`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `HORTALIZAS`
+--
+ALTER TABLE `HORTALIZAS`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `HORTALIZAS_FRUTERIAS`
+--
+ALTER TABLE `HORTALIZAS_FRUTERIAS`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ID_HORTALIZA` (`ID_HORTALIZA`),
+  ADD KEY `ID_FRUTERIA` (`ID_FRUTERIA`);
+
+--
+-- Indexes for table `VERDURAS`
+--
+ALTER TABLE `VERDURAS`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `VERDURAS_FRUTERIAS`
+--
+ALTER TABLE `VERDURAS_FRUTERIAS`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ID_VERDURA` (`ID_VERDURA`),
+  ADD KEY `ID_FRUTERIA` (`ID_FRUTERIA`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `FRUTERIAS`
+--
+ALTER TABLE `FRUTERIAS`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `HORTALIZAS`
+--
+ALTER TABLE `HORTALIZAS`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `HORTALIZAS_FRUTERIAS`
+--
+ALTER TABLE `HORTALIZAS_FRUTERIAS`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VERDURAS`
+--
+ALTER TABLE `VERDURAS`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VERDURAS_FRUTERIAS`
+--
+ALTER TABLE `VERDURAS_FRUTERIAS`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `HORTALIZAS_FRUTERIAS`
+--
+ALTER TABLE `HORTALIZAS_FRUTERIAS`
+  ADD CONSTRAINT `HORTALIZAS_FRUTERIAS_ibfk_1` FOREIGN KEY (`ID_HORTALIZA`) REFERENCES `HORTALIZAS` (`ID`),
+  ADD CONSTRAINT `HORTALIZAS_FRUTERIAS_ibfk_2` FOREIGN KEY (`ID_FRUTERIA`) REFERENCES `FRUTERIAS` (`ID`);
+
+--
+-- Constraints for table `VERDURAS_FRUTERIAS`
+--
+ALTER TABLE `VERDURAS_FRUTERIAS`
+  ADD CONSTRAINT `VERDURAS_FRUTERIAS_ibfk_1` FOREIGN KEY (`ID_VERDURA`) REFERENCES `VERDURAS` (`ID`),
+  ADD CONSTRAINT `VERDURAS_FRUTERIAS_ibfk_2` FOREIGN KEY (`ID_FRUTERIA`) REFERENCES `FRUTERIAS` (`ID`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
