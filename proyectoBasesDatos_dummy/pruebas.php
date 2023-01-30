@@ -1,0 +1,1 @@
+ SELECT * FROM partidas WHERE puntuacion < (SELECT puntuacion FROM partidas ORDER BY puntuacion ASC LIMIT 1 OFFSET 9);
