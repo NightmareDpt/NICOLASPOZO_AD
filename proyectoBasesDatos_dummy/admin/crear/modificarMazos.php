@@ -19,6 +19,7 @@ $conexion = conecctDB();
 $array = array();
 if (isset($_POST['nombremazo']) && isset($_POST['descripcion']) && !$_POST['nombremazo'] == "") {
     cambiarMazo($conexion, $_POST['opcion'], $_POST['nombremazo'], $_POST['descripcion']);
+    echo ('<script>alert("Mazo Cambiado")</script>');
 }
 $array = parametrosMazo($conexion);
 

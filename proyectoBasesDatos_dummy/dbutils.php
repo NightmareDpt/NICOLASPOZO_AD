@@ -137,11 +137,53 @@ function modificarCartas($db, $id, $nombre, $anno, $imagen, $mazo)
         echo "Error: No tengo ni idea de porque paso..." . $e->getMessage();
     }
 }
+function modificarCartas_noImagen($db, $id, $nombre, $anno, $mazo)
+{
+    try {
+        $stmt = $db->prepare("UPDATE cartas SET NOMBRE = :nombre, anno = :anno, mazo = :mazo WHERE ID = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':anno', $anno);
+        $stmt->bindParam(':mazo', $mazo);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Error: No tengo ni idea de porque paso..." . $e->getMessage();
+    }
+}
 function elminarCartas($db, $id)
 {
     try {
+        $delete = $db->prepare("SELECT * FROM CARTAS WHERE ID = :id");
+        $delete->bindParam(':id', $id);
+        $delete->execute();
+        $dato = $delete->fetchAll(PDO::FETCH_ASSOC);
+        unlink(__DIR__ . '/media/' . $dato[0]['imagen']);
         $stmt = $db->prepare("DELETE FROM cartas WHERE ID = :id");
         $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Error: No tengo ni idea de porque paso..." . $e->getMessage();
+    }
+}
+//COSAS DE DIEGO
+function obtenerNombreMazo($db, $opcion)
+{
+    $stmt = $db->prepare("SELECT NOMBRE FROM mazo WHERE ID = :opcion");
+    $stmt->bindParam(':opcion', $opcion);
+    $stmt->execute();
+    $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $datos;
+}
+
+
+function crearPartida($conDB, $nombre, $puntuacion, $mazo)
+{
+    try {
+        $stmt = $conDB->prepare('INSERT INTO partidas(ID,nombre,puntuacion,ID_mazo) VALUES (null,:nombre,:puntuacion,:ID_mazo)');
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':puntuacion', $puntuacion);
+        $stmt->bindParam(':ID_mazo', $mazo);
         $stmt->execute();
     } catch (PDOException $e) {
         echo "Error: No tengo ni idea de porque paso..." . $e->getMessage();

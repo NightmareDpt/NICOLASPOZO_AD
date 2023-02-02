@@ -6,20 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/style.css">
-    <title>Mazos</title>
+    <title>Cartas</title>
 </head>
 <?php
 session_start();
+require_once('../../dbutils.php');
+$conexion = conecctDB();
 if (!isset($_SESSION['user_name'])) {
     header('Location: ../login.php');
     exit;
 }
+$array = parametrosMazo($conexion);
 if (isset($_POST['nombrecarta'])) {
-    require_once('../../dbutils.php');
-    $conexion = conecctDB();
-    crearCartas($conexion, $_POST['nombre'], $_POST['anno'], $_POST['imagen'], $_POST['mazo']);
+    $errors = array();
+    $file_name = $_FILES['imagen']['name'];
+    $file_size = $_FILES['imagen']['size'];
+    $file_tmp = $_FILES['imagen']['tmp_name'];
+    $file_type = $_FILES['imagen']['type'];
 
-    echo ('<script>alert("Mazo Creado")</script>');
+    move_uploaded_file($_FILES['imagen']['tmp_name'], "../../media/" . $_FILES['imagen']['name']);
+
+    $extensions = array("jpeg", "jpg", "png", "jwepb");
+    crearCartas($conexion, $_POST['nombrecarta'], $_POST['annocarta'], $_FILES['imagen']['name'], $_POST['opcion']);
+    echo ('<script>alert("Carta Creada")</script>');
 }
 ?>
 
@@ -28,16 +37,27 @@ if (isset($_POST['nombrecarta'])) {
         <button id="link_admin">Volver</button>
     </a>
     <div id="hoja">
-        <form action="./mazos.php" method="post" id="formulario_usuarios">
+        <form action="./cartas.php" method="post" id="formulario_usuarios" enctype="multipart/form-data">
             <div class="mb-3">
-                <label for="nombrecarta" class="form-label">Nombre del Mazo</label>
+                <label for="nombrecarta" class="form-label">Nombre de la carta</label>
                 <input type="text" class="form-control" id="nombrecarta" name="nombrecarta">
             </div>
-            <div class="form-floating">
-                <textarea class="form-control" placeholder="Descripcion" id="floatingTextarea2" style="height: 100px"
-                    name="descripcion"></textarea>
-                <label for="floatingTextarea2">Descripcion</label>
+            <div class="mb-3">
+                <label for="annocarta" class="form-label">Año de la carta</label>
+                <input type="text" class="form-control" id="annocarta" name="annocarta">
             </div>
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input class="form-control" type="file" id="imagen" name="imagen">
+            </div>
+            <select class="form-select" aria-label="Default select example" name="opcion" id="select">
+                <option selected value="vacio">¿En que mazo?</option>
+                <?php
+                foreach ($array as $row) {
+                    echo ('<option value="' . $row['nombre'] . '">' . $row['nombre'] . '</option>');
+                }
+                ?>
+            </select>
             <button type="submit" class="btn btn-primary">Crear Mazo</button>
         </form>
     </div>
