@@ -1,6 +1,6 @@
 <html>
 <?php
-if(isset( $_SESSION["nombre"])){
+if(isset( $_SESSION["opcion"])){
     session_destroy();
 }
 //conexion a base de datos y sacar todos los mazos
@@ -10,43 +10,40 @@ $array = parametrosMazo($conexion);
 
 //Verificar si le ha dado a algún boton
 if(isset($_POST["Iniciar"])){
-    //verificar si le ha dado a jugar o a iniciar sesión
+    //verificar si le ha dado a jugar, iniciar sesión o ver ranking
     if($_POST["Iniciar"]=="jugar"){
         //verificamos si ha elegido un mazo y lanzamos un mensaje en caso contrario
         if($_POST["opcion"]=="vacio"){
                 echo '<script language="javascript">alert("¡DEBES DE ELEGIR UN MAZO!");</script>';
-        //verificamos si ha introducido 3 caracteres y lanzamos un mensaje en caso contrario        
-        }else if($_POST["nombre"]==""||strlen($_POST["nombre"])!=3){
-               echo '<script language="javascript">alert("¡EL NOMBRE DEBE DE TENER 3 CARACTERES!");</script>';
         }else{
         //verificamos si todo está bien pasamos a la siguiente ventana y pasamos los datos por session    
             session_start();
-            $_SESSION["nombre"]=$_POST["nombre"];
             $_SESSION["opcion"]=$_POST["opcion"];
+            $_SESSION["puntuar"]=true;
             header("Location:./game/juego.php");
         }
     
-    } else{
+    } else if($_POST["Iniciar"]=="admin"){
         //en caso de darle al boton de Iniciar sesión nos manda a la página de inicio de sesión de admin
         header("Location:./admin/login.php");
+    }else{
+        // En caso de darle a ver ranking nos manda a la pantalla de Ranking
+        header("Location:./game/ranking.php");
     }
 }
 ?>
 <link rel="stylesheet" href="./css/style.css">
     <head>
    </head>
-    <body>
+    <body id="cuerpo_raking">
     
-    <center><h1 style="font-family:Century Gothic;font-size:400%;color:white;">BIENVENIDO AL TIMELINE</h1></center>
+    <center><h1 style="margin:20px;font-size:400%;color:white;">Bienvenido &nbsp;&nbsp;&nbsp; al <br>  Timeline <br> Selecciona &nbsp;&nbsp;&nbsp;un&nbsp;&nbsp;&nbsp; Mazo</h1></center>
         <center>
             <!-- INICIO DE FORM -->
         <form action="./index.php" method="post" id="formInicio">
         <button type="submit" class="btn btn-primary btn-lg bt_iniciar" name="Iniciar" value="admin">ADMINISTRACION</button>
          <div id="hoja">
          <br><br><br><br><br>
-            <!-- INSERTAR INICIALES -->
-            <input type="text" name="nombre" class="nombre" placeholder="INSERTE SUS 3 INICIALES" maxlength="3" minlength="3"><br><br>
-            <br><br>
             <!-- LISTA DE MAZOS -->
             <select class="form-select" aria-label="Default select example" name="opcion" id="select_mazo">
                 <option selected  value="vacio">Selecciona un mazo para jugar</option>
@@ -59,6 +56,7 @@ if(isset($_POST["Iniciar"])){
             <!-- BOTON INICIAR -->
             <br><br><br><br>
             <button type="submit" class="btn btn-primary btn-lg" name="Iniciar" value="jugar">JUGAR</button>
+            <button type="submit" class="btn btn-primary btn-lg m-4" name="Iniciar" value="ranking">VER RANKING</button>
          </div>
         </form>
         </center>

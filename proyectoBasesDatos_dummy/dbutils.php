@@ -189,3 +189,37 @@ function crearPartida($conDB, $nombre, $puntuacion, $mazo)
         echo "Error: No tengo ni idea de porque paso..." . $e->getMessage();
     }
 }
+function mostrarRankingPrincipal($conDB)
+{
+    $stmt = $conDB->prepare("SELECT * FROM partidas ORDER BY puntuacion DESC LIMIT 10;");
+    $stmt->execute();
+    $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $array = array();
+    foreach ($datos as $row) {
+        $array[] = array(
+            "nombre" => $row['nombre'],
+            "puntuacion" => $row['puntuacion'],
+            "ID_mazo" => $row['ID_mazo']
+        );
+    }
+    return $array;
+}
+function comprobarUltimaPuntuacion($partidas, $puntuacion, $mazo)
+{
+    if (
+        isset(end($partidas)["puntuacion"]) && end($partidas)["puntuacion"] < $puntuacion
+        || isset(end($partidas)["puntuacion"]) && end($partidas)["puntuacion"] > $puntuacion && count($partidas) <= 9
+        || !isset(end($partidas)["puntuacion"])
+    ) {
+        $partidas[] = array(
+            "nombre" => "ZZZZ",
+            "puntuacion" => $puntuacion,
+            "ID_mazo" => $mazo
+        );
+        $puntuacion = array_column($partidas, 'puntuacion');
+
+        array_multisort($puntuacion, SORT_DESC, $partidas);
+    }
+
+    return $partidas;
+}

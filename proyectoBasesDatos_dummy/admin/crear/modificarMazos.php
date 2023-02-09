@@ -44,8 +44,7 @@ $array = parametrosMazo($conexion);
                 <input type="text" class="form-control" id="nombremazo" name="nombremazo">
             </div>
             <div class="form-floating">
-                <textarea class="form-control" placeholder="Descripcion" id="descripcion" style="height: 100px"
-                    name="descripcion"></textarea>
+                <textarea class="form-control" placeholder="Descripcion" id="descripcion" style="height: 100px" name="descripcion"></textarea>
                 <label for="descripcion">Descripcion</label>
             </div>
             <button type="submit" class="btn btn-primary">Modificar Mazo</button>
@@ -55,32 +54,30 @@ $array = parametrosMazo($conexion);
 </body>
 
 <script>
-var datos_php = <?php
+    var datos_php = <?php
                     $array_json = json_encode($array);
                     echo json_encode($array); ?>;
-var nombre = document.getElementById("nombremazo")
-var descripcion = document.getElementById("descripcion")
+    var nombre = document.getElementById("nombremazo")
+    var descripcion = document.getElementById("descripcion")
 
-document.getElementById("select_mazo").addEventListener("change", function() {
-    var opcionSeleccionada = this.value;
-    datos_php.forEach(function(dato) {
-        if (dato.id == opcionSeleccionada) {
-            nombre.value = dato.nombre
-            descripcion.value = dato.descripcion
-        }
-        if (opcionSeleccionada == "vacio") {
-            nombre.value = ""
-            descripcion.value = ""
-        }
+    document.getElementById("select_mazo").addEventListener("change", function() {
+        var opcionSeleccionada = this.value;
+        datos_php.forEach(function(dato) {
+            if (dato.id == opcionSeleccionada) {
+                nombre.value = dato.nombre
+                descripcion.value = dato.descripcion
+            }
+            if (opcionSeleccionada == "vacio") {
+                nombre.value = ""
+                descripcion.value = ""
+            }
+        });
     });
-});
 </script>
 
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
 </script>
 
 </html>

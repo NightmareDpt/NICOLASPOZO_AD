@@ -1,12 +1,22 @@
+@font-face{
+    font-family:Arcade;
+    src:url(ARCADECLASSIC.TTF);
+}
+
 #boton_iniciar {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
 }
+body{
+    font-family: Arcade;
+    color:white;
+    background-color: black;
+}
 
 #inicio {
-    background-image: url("../media/timeline.jpg");
+      
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,15 +27,31 @@
     float: right;
 }
 #cartas_workspace{
+    
+    font-family: Arcade;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
 }
 #hoja{
-    width: 25%;
+    width: 30%;
      position: fixed;
     top: 40%;
     left: 40%;
     transform: translate(-30%,-50%);   
+    text-align: center;
+    
 }
+
+.bt_iniciar{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin:20px;
+}
+
+#input_alineado{
+   text-align: center;
+}
+
