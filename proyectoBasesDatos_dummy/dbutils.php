@@ -166,7 +166,7 @@ function elminarCartas($db, $id)
     }
 }
 //COSAS DE DIEGO
-function obtenerNombreMazo($db, $opcion)
+function obtenerNombreMazo($db,$opcion)
 {
     $stmt = $db->prepare("SELECT NOMBRE FROM mazo WHERE ID = :opcion");
     $stmt->bindParam(':opcion', $opcion);
@@ -177,7 +177,7 @@ function obtenerNombreMazo($db, $opcion)
 }
 
 
-function crearPartida($conDB, $nombre, $puntuacion, $mazo)
+function crearPartida($conDB,$nombre,$puntuacion,$mazo)
 {
     try {
         $stmt = $conDB->prepare('INSERT INTO partidas(ID,nombre,puntuacion,ID_mazo) VALUES (null,:nombre,:puntuacion,:ID_mazo)');
@@ -191,7 +191,7 @@ function crearPartida($conDB, $nombre, $puntuacion, $mazo)
 }
 function mostrarRankingPrincipal($conDB)
 {
-    $stmt = $conDB->prepare("SELECT * FROM partidas ORDER BY puntuacion DESC LIMIT 10;");
+    $stmt =$conDB->prepare("SELECT * FROM partidas ORDER BY puntuacion DESC LIMIT 10;");
     $stmt->execute();
     $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $array = array();
@@ -204,16 +204,13 @@ function mostrarRankingPrincipal($conDB)
     }
     return $array;
 }
-function comprobarUltimaPuntuacion($partidas, $puntuacion, $mazo)
-{
-    if (
-        isset(end($partidas)["puntuacion"]) && end($partidas)["puntuacion"] < $puntuacion
-        || isset(end($partidas)["puntuacion"]) && end($partidas)["puntuacion"] > $puntuacion && count($partidas) <= 9
-        || !isset(end($partidas)["puntuacion"])
-    ) {
-        $partidas[] = array(
-            "nombre" => "ZZZZ",
-            "puntuacion" => $puntuacion,
+function comprobarUltimaPuntuacion($partidas,$puntuacion,$mazo){
+    if(isset(end($partidas)["puntuacion"])&&end($partidas)["puntuacion"]<$puntuacion
+    ||isset(end($partidas)["puntuacion"])&&end($partidas)["puntuacion"]>$puntuacion&&count($partidas)<=9
+    ||!isset(end($partidas)["puntuacion"])){
+        $partidas[]=array(
+            "nombre" =>"ZZZZ",
+            "puntuacion"=>$puntuacion,
             "ID_mazo" => $mazo
         );
         $puntuacion = array_column($partidas, 'puntuacion');

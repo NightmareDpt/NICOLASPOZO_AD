@@ -32,7 +32,7 @@ if (isset($_POST['nombrecarta'])) {
 }
 ?>
 
-<body>
+<body id="cuerpo_ochentero">
     <a href="../workspace.php">
         <button id="link_admin">Volver</button>
     </a>

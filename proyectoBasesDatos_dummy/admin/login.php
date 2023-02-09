@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>Login</title>
-
 </head>
 
 <?php
@@ -31,30 +30,27 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 ?>
 
-<body>
-    <a href="../index.php">
-        <p id="link_admin">Volver</p>
-
+<body id="cuerpo_ochentero">
+<a href="../index.php"> 
+        <button class="btn btn-primary btn-lg bt_iniciar" id="link_admin">VOLVER &nbsp;&nbsp; A &nbsp;&nbsp; INICIO</button>
     </a>
-    <div class="container col-5" id="boton_iniciar">
+    <div id="hoja">
         <form action="./login.php" method="post">
-            <div class="mb-3 row">
-                <label for="inputUser" class="col-sm-2 col-form-label">Usuario</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputUser" placeholder="usuario" name="username">
-                </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <input type="text" class="form-control" name="username" placeholder="Inserte su usuario" aria-describedby="addon-wrapping">
             </div>
-            <div class="mb-3 row">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Contraseña">
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg col-2">Log In</button>
+            <br>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Contraseña</span>
+                <input type="password" class="form-control" name="password" placeholder="Inserte su contraseña" aria-describedby="addon-wrapping">
+            </div>
+            <button ttype="submit" value="Log in" class="btn btn-primary btn-lg bt_iniciar" id="link_admin">INICIAR &nbsp;&nbsp; SESION</button>
         </form>
-    </div>
+    </div>    
 </body>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
-</script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 </html>

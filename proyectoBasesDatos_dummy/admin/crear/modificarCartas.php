@@ -36,7 +36,7 @@ $array = parametrosMazo($conexion);
 $arraycartas = mostrarCartas($conexion);
 ?>
 
-<body>
+<body id="cuerpo_ochentero">
     <a href="../workspace.php">
         <button id="link_admin">Volver</button>
     </a>
@@ -68,7 +68,7 @@ $arraycartas = mostrarCartas($conexion);
                 <input class="form-control" type="file" id="imagen" name="imagen">
             </div>
             <p>si la imagen es superior a 200x200 peta</p>
-            <img src="..." class="rounded mx-auto d-block" id="imagenVer" height="200" width="200">
+            <img src="..." class="rounded mx-auto d-block" id="imagenVer" height="200" width="200"><br>
             <select class="form-select" aria-label="Default select example" name="opcion" id="select">
                 <option selected value="vacio">Cambiar mazo</option>
                 <?php
@@ -76,7 +76,7 @@ $arraycartas = mostrarCartas($conexion);
                     echo ('<option value="' . $row['nombre'] . '">' . $row['nombre'] . '</option>');
                 }
                 ?>
-            </select>
+            </select><br>
             <button type="submit" class="btn btn-primary">Cambiar Carta</button>
         </form>
     </div>

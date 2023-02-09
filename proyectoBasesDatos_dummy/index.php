@@ -1,6 +1,6 @@
 <html>
 <?php
-if(isset( $_SESSION["opcion"])){
+if(isset($_SESSION["opcion"])){
     session_destroy();
 }
 //conexion a base de datos y sacar todos los mazos
@@ -35,7 +35,7 @@ if(isset($_POST["Iniciar"])){
 <link rel="stylesheet" href="./css/style.css">
     <head>
    </head>
-    <body id="cuerpo_raking">
+    <body id="cuerpo_ochentero">
     
     <center><h1 style="margin:20px;font-size:400%;color:white;">Bienvenido &nbsp;&nbsp;&nbsp; al <br>  Timeline <br> Selecciona &nbsp;&nbsp;&nbsp;un&nbsp;&nbsp;&nbsp; Mazo</h1></center>
         <center>

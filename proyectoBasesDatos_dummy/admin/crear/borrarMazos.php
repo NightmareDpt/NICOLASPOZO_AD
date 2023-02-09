@@ -24,7 +24,7 @@ if (isset($_POST['opcion'])) {
 $array = parametrosMazo($conexion);
 ?>
 
-<body>
+<body id="cuerpo_ochentero">
     <a href="../workspace.php">
         <button id="link_admin">Volver</button>
     </a>

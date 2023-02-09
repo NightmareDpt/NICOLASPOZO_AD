@@ -32,6 +32,8 @@
             }
         
         }else if(isset($_POST["Iniciar"])&&$_POST["Iniciar"]=="inicio"){
+                //Destruimos la sesion para no crear posibles problemas
+                session_destroy();            
             header("location:../index.php");
         }
 ?>
@@ -43,13 +45,15 @@
     <title>Ranking</title>
 </head>
 
-<body id="cuerpo_raking">
+<body id="cuerpo_ochentero">
+
     <form action="./ranking.php" method="post">
+
     <button type="submit" class="btn btn-primary btn-lg bt_iniciar" name="Iniciar" value="inicio">VOLVER &nbsp;&nbsp; A &nbsp;&nbsp; INICIO</button>
-    <div id="hoja" >
-    <table class="table" id="cuerpo_raking">
-    <!-- Cabecera de la tabla -->
-   <h1>RANKING GENERAL</h1>
+    <div >
+        <!-- Cabecera de la tabla -->
+        <h1 id="centrado_titulo">RANKING GENERAL</h1>        
+    <table class="table" id="tabla_ranking">
     <thead>
         <tr>
         <th scope="col">POSICION</th>
@@ -76,6 +80,9 @@
           </td>
             <td>
             '.$ranking_bd[$i]["puntuacion"].'
+            </td>
+            <td>
+            <button type="submit" class="btn btn-primary btn-lg" name="Iniciar" value="guardar">GUARDAR</button>
             </td>
             </tr>
             ';
@@ -111,14 +118,16 @@
             ';
         }
     }
+//    if(is_numeric(array_search("ZZZZ",array_column($ranking_bd,'nombre'))))
+ //  
 ?>
+
   </tbody>
+
 </table>
-    <?php
-    if(is_numeric(array_search("ZZZZ",array_column($ranking_bd,'nombre'))))
-        echo '<button type="submit" class="btn btn-primary btn-lg" name="Iniciar" value="guardar">GUARDAR</button>';
-    ?>
+
 </form>
+
 </body>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

@@ -22,7 +22,7 @@ if (isset($_POST['nombremazo'])) {
 }
 ?>
 
-<body>
+<body id="cuerpo_ochentero">
     <a href="../workspace.php">
         <button id="link_admin">Volver</button>
     </a>

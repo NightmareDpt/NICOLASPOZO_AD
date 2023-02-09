@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="esp ">
+<html lang="esp">
 <?php
 session_start();
 //Preguntamos si viene de la pagina de login viendo si existe una sessión de tipo nombre
@@ -40,11 +40,11 @@ if(isset($_POST["Iniciar"])){
 </head>
 
 <!--INICIO DE BODY -->
-<body id="cuerpo_raking">
+<body id="cuerpo_ochentero">
         <!--INICIO DE FORM -->
     <form action="juego.php" method="post">
     <button type="submit" class="btn btn-primary btn-lg bt_iniciar" name="Iniciar" value="inicio">VOLVER &nbsp;&nbsp; A &nbsp;&nbsp; INICIO</button>
-    <div id="hoja">
+    <div id="cuerpo_ochentero_centrado">
         <!--CABECERA -->
         <h1 class="texto_centrado"><?php echo "Inserta &nbsp;&nbsp; tu &nbsp;&nbsp; puntuacion &nbsp;&nbsp;  con &nbsp;&nbsp;  el &nbsp;&nbsp; mazo &nbsp;&nbsp; ".$dato[0]["NOMBRE"]; ?></h1>
         <div class="input-group input-group-lg">

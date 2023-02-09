@@ -1,7 +1,8 @@
 @font-face{
     font-family:Arcade;
-    src:url(ARCADECLASSIC.TTF);
+    src: url(ARCADECLASSIC.TTF);
 }
+
 
 #boton_iniciar {
     position: fixed;
@@ -9,14 +10,8 @@
     left: 50%;
     transform: translate(-50%,-50%);
 }
-body{
-    font-family: Arcade;
-    color:white;
-    background-color: black;
-}
 
 #inicio {
-      
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -27,20 +22,19 @@ body{
     float: right;
 }
 #cartas_workspace{
-    
-    font-family: Arcade;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    top: 60%;
+    left: 60%;
+    transform: translate(-40%,-40%);
 }
 #hoja{
-    width: 30%;
+    width: 40%;
      position: fixed;
     top: 40%;
     left: 40%;
     transform: translate(-30%,-50%);   
     text-align: center;
+    align-items: center;
     
 }
 
@@ -55,3 +49,40 @@ body{
    text-align: center;
 }
 
+#cuerpo_ochentero{
+    font-family: Arcade;
+    letter-spacing: 5px;
+    color:white;
+    background-color: black;
+
+}
+
+#cuerpo_ochentero_centrado{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#tabla_ranking{
+    font-family: Arcade;
+    color:white;
+    font-size: 35px;
+    width: 60%;
+    background-color: black;  
+    text-align: center;
+    align-items: center;
+    letter-spacing: 5px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+
+}
+
+#centrado_titulo{
+    font-family: Arcade;
+    letter-spacing: 5px;
+    font-size: 60px;
+    color:white;
+    text-align: center;
+}

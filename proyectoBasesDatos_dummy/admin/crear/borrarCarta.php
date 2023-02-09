@@ -25,7 +25,7 @@ $array = parametrosMazo($conexion);
 $arraycartas = mostrarCartas($conexion);
 ?>
 
-<body>
+<body id="cuerpo_ochentero">
     <a href="../workspace.php">
         <button id="link_admin">Volver</button>
     </a>
@@ -53,6 +53,7 @@ $arraycartas = mostrarCartas($conexion);
                 <input type="text" class="form-control" id="annocarta" name="annocarta" disabled>
             </div>
             <img src="..." class="rounded mx-auto d-block" id="imagenVer" height="200" width="200">
+            <br><br><br>
             <button type="submit" class="btn btn-primary">Borrar Carta</button>
         </form>
     </div>
