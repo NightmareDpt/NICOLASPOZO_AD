@@ -52,7 +52,7 @@
     <button type="submit" class="btn btn-primary btn-lg bt_iniciar" name="Iniciar" value="inicio">VOLVER &nbsp;&nbsp; A &nbsp;&nbsp; INICIO</button>
     <div >
         <!-- Cabecera de la tabla -->
-        <h1 id="centrado_titulo">RANKING GENERAL</h1>        
+        <h1 id="centrado_titulo" style="color:#cc0000;">RANKING GENERAL</h1>        
     <table class="table" id="tabla_ranking">
     <thead>
         <tr>
@@ -66,14 +66,24 @@
     <tbody>
 <?php
     for($i=0; $i < 10;$i++){
+        if($i==0){
+            $color="#efb810";
+        }else if($i==1){
+            $color="#c0c0c0";
+        }else if($i==2){
+            $color="#cd7f32";
+        }else{
+            $color="#8cc895";
+        }
+
         if(isset($ranking_bd[$i])&&$ranking_bd[$i]["nombre"]=="ZZZZ"){
             echo '
-            <tr>
+            <tr style="color:'.$color.';">
             <th scope="row">'.($i+1).'</th>
             <td>
-            <input type="text" name="letra_1" id="input_alineado" class="col-3" maxlength="1" minlength="1">
-            <input type="text" name="letra_2" id="input_alineado" class="col-3" maxlength="1" minlength="1">
-            <input type="text" name="letra_3" id="input_alineado" class="col-3" maxlength="1" minlength="1">
+            <input type="text" name="letra_1" id="input_alineado" class="col-3" value="'.(isset($_POST["letra_1"]) ? $_POST["letra_1"] :"").'"  maxlength="1" minlength="1">
+            <input type="text" name="letra_2" id="input_alineado" class="col-3" value="'.(isset($_POST["letra_2"]) ? $_POST["letra_2"] :"").'" maxlength="1" minlength="1">
+            <input type="text" name="letra_3" id="input_alineado" class="col-3" value="'.(isset($_POST["letra_3"]) ? $_POST["letra_3"] :"").'" maxlength="1" minlength="1">
           </td>
           <td>
           '.$mazos[array_search($ranking_bd[$i]["ID_mazo"],array_column($mazos, 'id'))]["nombre"].'
@@ -88,14 +98,14 @@
             ';
         }else if(isset($ranking_bd[$i])){
             echo '
-            <tr>
+            <tr style="color:'.$color.';">
             <th scope="row">'.($i+1).'</th>
             <td>
             '.$ranking_bd[$i]["nombre"].' 
-          </td>
-          <td>
-          '.$mazos[array_search($ranking_bd[$i]["ID_mazo"],array_column($mazos, 'id'))]["nombre"].'
-          </td>
+            </td>
+            <td>
+            '.$mazos[array_search($ranking_bd[$i]["ID_mazo"],array_column($mazos, 'id'))]["nombre"].'
+            </td>
             <td>
             '.$ranking_bd[$i]["puntuacion"].'
             </td>
@@ -103,7 +113,7 @@
             ';
         }else{
             echo '
-            <tr>
+            <tr style="color:'.$color.';">
             <th scope="row">'.($i+1).'</th>
             <td>
              _ _ _
